@@ -117,6 +117,4 @@ class ProductHunt
 
 end
 
-PH = ProductHunt.new
-PH.start
 
