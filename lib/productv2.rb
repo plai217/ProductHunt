@@ -1,4 +1,5 @@
 require 'pry'
+require 'colorize'
 
 class ProductHunt
 
@@ -51,7 +52,7 @@ attr_accessor :products, :name, :comments
   def display
     @products = Hash[@products.sort_by{|k, v| v}.reverse]
     @products.each do |product,votes|
-      puts "Product: #{product} Votes: #{votes}"
+      puts "Product: #{product} Votes: #{votes}".red
     end
   end
 
@@ -61,9 +62,9 @@ attr_accessor :products, :name, :comments
     if @products.has_key?(product) == false
       @products[product] = 0
       @comments[product] = {}
-      puts "Product #{product} added"
+      puts "Product #{product} added".red
     else
-      puts "Product already exists"
+      puts "Product already exists".red
     end
   end
 
@@ -72,8 +73,8 @@ attr_accessor :products, :name, :comments
     user = gets.strip
     product = ''
     until @products.has_key?(product)
-      puts "Products"
-      @products.each {|x,y| puts "#{x}"}
+      puts "Products".red
+      @products.each {|x,y| puts "#{x}".red}
       puts "please enter vaild product"
       product = gets.strip
     end
@@ -131,8 +132,8 @@ attr_accessor :products, :name, :comments
     user = gets.strip
     product = ''
     until @products.has_key?(product)
-      puts "Products"
-      @products.each {|x,y| puts "#{x}"}
+      puts "Products".red
+      @products.each {|x,y| puts "#{x}".red}
       puts "please enter vaild product"
       product = gets.strip
     end
@@ -144,22 +145,22 @@ attr_accessor :products, :name, :comments
 
   def applycomment(user,product,comment)
     @comments[product][comment] = user
-    puts  @comments[product][comment]
+    puts "Comment added"
   end
 
   def displaycomments
-    puts "Products"
-    @products.each {|x,y| puts "#{x}"}
+    puts "Products".red
+    @products.each {|x,y| puts "#{x}".red}
     puts "Please enter a valid product you wish to see comments for"
     product = gets.strip
     until @products.has_key?(product)
-      puts "Products"
-      @products.each {|x,y| puts "#{x}"}
+      puts "Products".red
+      @products.each {|x,y| puts "#{x}".red}
       puts "Please enter a valid product you wish to see comments for"
       product = gets.strip
     end
-    puts "Comments for #{product}"
-    @comments[product].each {|key,value|puts "#{key} posted by #{value}"}
+    puts "Comments for #{product}".red
+    @comments[product].each {|key,value|puts "#{key} posted by #{value}".red}
   end
 
 end
