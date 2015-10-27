@@ -16,6 +16,7 @@ attr_accessor :products, :name, :comments
              }
   end
 
+  #start menu
   def start
     input = 0
     until (input == 1 || input == 2 || input == 3 || input == 4 || input == 5 || input == 6)
@@ -45,10 +46,11 @@ attr_accessor :products, :name, :comments
     elsif input == 4
       startvote
     elsif input == 5
-      startcomment
+      addcomment
     end
   end
 
+  #displays all products and votes
   def display
     @products = Hash[@products.sort_by{|k, v| v}.reverse]
     @products.each do |product,votes|
@@ -56,6 +58,7 @@ attr_accessor :products, :name, :comments
     end
   end
 
+  #adds a new product
   def addproduct
     puts "Please enter product"
     product = gets.strip
@@ -68,6 +71,7 @@ attr_accessor :products, :name, :comments
     end
   end
 
+  #lets user up vote or down vote a product
   def startvote
     puts "Please enter name"
     user = gets.strip
@@ -86,6 +90,7 @@ attr_accessor :products, :name, :comments
     applyvote(user,product,vote)
   end
 
+  #checks if user already voted and applys new vote based on previous vote
   def applyvote(user,product,vote)
     if user_status(user,product,vote) == "newuser"
       addvote(user,product,vote)
@@ -127,7 +132,8 @@ attr_accessor :products, :name, :comments
     end
   end
 
-  def startcomment
+  #adds comment to product
+  def addcomment
     puts "Please enter name"
     user = gets.strip
     product = ''
@@ -140,14 +146,11 @@ attr_accessor :products, :name, :comments
     comment = ''
     puts "please enter comment"
     comment = gets.strip
-    applycomment(user,product,comment)
-  end
-
-  def applycomment(user,product,comment)
     @comments[product][comment] = user
     puts "Comment added"
   end
 
+  #displays comments for a product
   def displaycomments
     puts "Products".red
     @products.each {|x,y| puts "#{x}".red}
