@@ -3,8 +3,6 @@ require 'colorize'
 
 class ProductHunt
 
-attr_accessor :products, :name, :comments
-
   def initialize
     @products = {"Test1" => 5, "Test2" =>4}
     @comments = {"Test1" => {"My comment1 abc" => "Person1", "My comment1 xyz" => "Person2"},
@@ -28,18 +26,21 @@ attr_accessor :products, :name, :comments
       puts "Please enter 6 to quit"
       input = gets.to_i
     end
+
     if input == 6
       puts "Good Bye"
     else
       continue(input)
       start
     end
+
   end
 
+  #
   def continue(input)
     if input == 1
       display
-    elsif input ==2
+    elsif input == 2
       displaycomments
     elsif input == 3
       addproduct
@@ -75,6 +76,7 @@ attr_accessor :products, :name, :comments
   def startvote
     puts "Please enter name"
     user = gets.strip
+
     product = ''
     until @products.has_key?(product)
       puts "Products".red
@@ -82,11 +84,13 @@ attr_accessor :products, :name, :comments
       puts "please enter vaild product"
       product = gets.strip
     end
+
     vote = ''
     until vote == 'up' || vote == 'down'
       puts "please enter up or down"
       vote = gets.strip
     end 
+
     applyvote(user,product,vote)
   end
 
@@ -136,6 +140,7 @@ attr_accessor :products, :name, :comments
   def addcomment
     puts "Please enter name"
     user = gets.strip
+
     product = ''
     until @products.has_key?(product)
       puts "Products".red
@@ -143,19 +148,18 @@ attr_accessor :products, :name, :comments
       puts "please enter vaild product"
       product = gets.strip
     end
+
     comment = ''
     puts "please enter comment"
     comment = gets.strip
+
     @comments[product][comment] = user
     puts "Comment added"
   end
 
   #displays comments for a product
   def displaycomments
-    puts "Products".red
-    @products.each {|x,y| puts "#{x}".red}
-    puts "Please enter a valid product you wish to see comments for"
-    product = gets.strip
+    product = ''
     until @products.has_key?(product)
       puts "Products".red
       @products.each {|x,y| puts "#{x}".red}
